@@ -12,3 +12,7 @@ input, button {
   margin: 5px;
 }
 
+.bdr {
+  border: 1px double black;
+  margin: 2px 2px;
+}

@@ -10,7 +10,7 @@ const corsOptions ={
 }
 app.use(cors(corsOptions));
 
-const FoodModel = require("./models/Food");
+const FoodModel = require("./models/Food"); //MongoDB model
 
 app.use(express.json())
 
@@ -19,6 +19,7 @@ mongoose.connect("mongodb+srv://JRS296:pappa123@cluster0.gc5ji3s.mongodb.net/foo
 })
 
 //POST Example
+//insert - route
 app.post('/insert', async (req,res) => {
     const fN = req.body.foodName
     const ds = req.body.days
@@ -31,7 +32,21 @@ app.post('/insert', async (req,res) => {
         console.log(error);
         console.log()
     }
-})
+}); 
+
+//GET Example
+// /read - route
+app.get('/read', async (req,res) => {//type http://localhost:3001/read to get data
+    //FoodModel.find({ $where: {foodName: "Apple"}}, (err,result))
+    FoodModel.find({}, (err,result) => {
+        if(err)
+        {
+            console.log(err);
+            res.send(err)
+        }
+        res.send(result)
+    })
+});
 
 app.listen(3001, ()=> {
     console.log('Server running on port 3001')
