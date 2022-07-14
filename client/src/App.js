@@ -21,6 +21,7 @@ function App() {
       foodName: foodName,
       days: days,
     });
+    if(!alert('Added Successfully')){window.location.reload();}
   };
 
   const updateFood = (id) => {
@@ -28,6 +29,12 @@ function App() {
       id: id,
       newName: newName, 
     });
+    if(!alert('Updated')){window.location.reload();}
+  }
+
+  const deleteFood = (id) => {
+    Axios.delete(`http://localhost:3001/delete/${id}`); 
+    if(!alert('Deleted')){window.location.reload();}
   }
 
   return (
@@ -47,7 +54,7 @@ function App() {
             <span><h5> {val.foodName} </h5><h5> {val.daysSinceIAte} </h5></span> {" "}
             <input type="text" placeholder="Enter Change in name:" onChange={(e) => {setNewName(e.target.value)}}></input>
             <button onClick={() => updateFood(val._id)}>Update</button>
-            <button>Delete</button>
+            <button onClick={() => deleteFood(val._id)}>Delete</button>
           </div>
         );
       })}
