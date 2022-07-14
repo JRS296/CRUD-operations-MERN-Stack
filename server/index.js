@@ -48,6 +48,22 @@ app.get('/read', async (req,res) => {//type http://localhost:3001/read to get da
     })
 });
 
+//Update Route
+app.put('/update', async (req,res) => {
+    const nfN = req.body.newName
+    const id = req.body.id
+
+    try {
+        await FoodModel.findById(id, (err, updatedFood) => {
+            updatedFood.foodName = nfN;
+            updatedFood.save();
+            res.send("update");
+        });
+    } catch (err) {
+        console.log(err);
+    }
+}); 
+
 app.listen(3001, ()=> {
     console.log('Server running on port 3001')
 })
